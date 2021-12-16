@@ -1,0 +1,12 @@
+.bannerContainer {
+    z-index:0;
+}
+
+.bannerImage {
+    z-index:0;
+}
+
+.bannerText {
+    position: relative;
+    z-index: 1;
+}
