@@ -1,7 +1,7 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from 'next'
 import Layout from '../../components/Layout'
 import Hero from '../../components/Hero'
-import MapBlock from '../../components/MapBlock'
+import VenueBlock from '../../components/VenueBlock'
 import { getItem } from '../../lib/api'
 import { Event } from "../../models/Event"
 import SponsorBlock from '../../components/SponsorsBlock'
@@ -10,6 +10,7 @@ import { Venue } from '../../models/Venue'
 import { Sponsor } from '../../models/Sponsor'
 import styles from '../../styles/Home.module.css'
 import { ParsedUrlQuery } from 'querystring'
+import { buildCollectionUrl } from '../../lib/utils/urlHelper'
 
 //https://wallis.dev/blog/nextjs-getstaticprops-and-getstaticpaths-with-typescript
 interface IParams extends ParsedUrlQuery {
@@ -48,7 +49,7 @@ const Home: NextPage<Props> = ({ eventData }) => {
         />
 
       {/* VENUE BLOCK */}
-      <MapBlock 
+      <VenueBlock 
         heading="Event Venue" 
         venue={venue}
         linkedItems={linkedItems}
@@ -66,14 +67,7 @@ const Home: NextPage<Props> = ({ eventData }) => {
 
 // does this have to be repeated at every level in the nav hierarchy??
 export const getStaticPaths: GetStaticPaths = async () => {
-  const collections = ['denver', 'brno', 'melbourne']
-
-  const paths = collections.map((collection) => (
-      {
-          params: {collection},
-      }
-      ))
-
+  const paths = buildCollectionUrl()
   return {
       paths: paths,
       fallback: false

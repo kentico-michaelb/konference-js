@@ -30,4 +30,19 @@ export async function getItemsOfType<T extends IContentItem>(
         .depthParameter(depth)
         .toPromise()
         .then(response => response.data)
-}
+    }
+
+export async function getSpeakerSessions<T extends IContentItem>(
+    speaker: string,
+    depth: number, 
+    )
+    {
+        return await client
+        .items<T>()
+        .type('session')
+        .depthParameter(depth)
+        .containsFilter('speaker', [speaker])
+        .orderByDescending('system.collection')
+        .toPromise()
+        .then(response => response.data)
+    }

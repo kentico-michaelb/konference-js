@@ -1,18 +1,16 @@
-import { Presentation } from "../models/Presentation";
 import { Room } from "../models/Room";
-import { Speaker } from "../models/Speaker";
 import { DateTime } from 'luxon'
 
-export default function Agenda({
+export default function Session({
     name,
     dateTimeFromDateTime,
     dateTimeToDateTime,
     sessionId,
     location }:{
         name: string,
-        dateTimeFromDateTime: string | null,
-        dateTimeToDateTime: string | null,
-        location: Room,
+        dateTimeFromDateTime?: string | null,
+        dateTimeToDateTime?: string | null,
+        location?: Room,
         sessionId: string
     }
 )
@@ -21,12 +19,12 @@ export default function Agenda({
 
     return (
         <div key={sessionId}>
-            <span>
-            {dateTimeFromDateTime && DateTime.fromISO(dateTimeFromDateTime).toLocaleString(DateTime.TIME_SIMPLE)}
-            -
-            {dateTimeToDateTime && DateTime.fromISO(dateTimeToDateTime).toLocaleString(DateTime.TIME_SIMPLE)}
-            </span>
-            &nbsp; | &nbsp;
+            {dateTimeFromDateTime && 
+                <span>{DateTime.fromISO(dateTimeFromDateTime).toLocaleString(DateTime.TIME_SIMPLE)} -</span>}
+            
+            {dateTimeToDateTime && 
+            <span>{DateTime.fromISO(dateTimeToDateTime).toLocaleString(DateTime.TIME_SIMPLE)} &nbsp; | &nbsp;</span>}
+            
             {name}
             
             {location && 

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { DateTime } from 'luxon'
 import styles from '../styles/Hero.module.css'
 
 
@@ -10,8 +11,8 @@ export default function Hero({
     location }:{
         title: string,
         image: string,
-        dateFrom: any,
-        dateTo: any,
+        dateFrom: string | null,
+        dateTo: string | null,
         location: string  
     }
 ) {
@@ -27,7 +28,11 @@ export default function Hero({
             />
             <div className={styles.bannerText}>
                 <h1 className={styles.title}>{title}</h1>
-                <h2>{dateFrom} - {dateTo}</h2>
+                <h2>
+                    {dateFrom && DateTime.fromISO(dateFrom).toLocaleString(DateTime.DATETIME_MED_WITH_WEEKDAY)}
+                    &ndash;
+                    {dateTo && DateTime.fromISO(dateTo).toLocaleString(DateTime.DATETIME_MED_WITH_WEEKDAY)}
+                </h2>   
                 <h3>{location}</h3>
             </div>
         </div>

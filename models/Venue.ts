@@ -7,7 +7,7 @@ export type Venue = IContentItem<{
   rooms: Elements.LinkedItemsElement<IContentItem>;
   name: Elements.TextElement;
   journeyStage: Elements.TaxonomyElement;
-  address: Elements.RichTextElement;
+  address: Elements.TextElement;
   media: Elements.LinkedItemsElement<IContentItem>;
   description: Elements.RichTextElement;
   nearbyLodging: Elements.LinkedItemsElement<IContentItem>;

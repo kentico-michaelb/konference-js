@@ -5,6 +5,7 @@ import styles from '../../../styles/Home.module.css'
 import Agenda from '../../../components/Agenda'
 import { Agenda as AgendaModel } from '../../../models/Agenda'
 import { ParsedUrlQuery } from 'querystring'
+import { buildCollectionUrl } from '../../../lib/utils/urlHelper'
 
 //https://wallis.dev/blog/nextjs-getstaticprops-and-getstaticpaths-with-typescript
 interface IParams extends ParsedUrlQuery {
@@ -20,7 +21,6 @@ const AgendaPage: NextPage<Props> = ({ agendas }) => {
     <Layout>
     <div className={styles.container}>
 
-      {/* AGENDA */}
       {agendas.map(agenda => (
         <div key={agenda.system.id}>
           <Agenda
@@ -38,14 +38,7 @@ const AgendaPage: NextPage<Props> = ({ agendas }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const collections = ['denver', 'brno', 'melbourne']
-
-  const paths = collections.map((collection) => (
-      {
-          params: {collection},
-      }
-      ))
-
+  const paths = buildCollectionUrl()
   return {
       paths: paths,
       fallback: false
