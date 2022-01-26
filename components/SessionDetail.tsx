@@ -3,6 +3,7 @@ import { Room } from "../models/Room";
 import { Speaker } from "../models/Speaker";
 import { DateTime } from 'luxon'
 import RichText from "./RichText";
+import { IContentItemsContainer } from "@kentico/kontent-delivery";
 
 export default function SessionDetail({
     name,
@@ -11,7 +12,8 @@ export default function SessionDetail({
     dateTimeFromDateTime,
     dateTimeToDateTime,
     sessionId,
-    location }:{
+    location,
+    linkedItems }:{
         name: string,
         presentations: Array<Presentation>,
         speakers: Array<Speaker>,
@@ -19,6 +21,7 @@ export default function SessionDetail({
         dateTimeToDateTime: string | null,
         location: Room,
         sessionId: string
+        linkedItems: IContentItemsContainer
     }
 )
 
@@ -49,18 +52,26 @@ export default function SessionDetail({
                         </h4>
                         <RichText
                             richTextElement={speaker.elements.bio}
-                            linkedItems={speaker.elements.bio.linkedItemCodenames}
+                            linkedItems={linkedItems}
                         />
                     </div>
                 )) 
                 
             }
+            
             <hr/>
             <h4>Presentation materials and Downloads</h4>
             {presentations &&
                 presentations.map(presentation => (
                     <div key={presentation.system.id}>
                         {presentation.elements.name.value}
+                    
+                    {presentation.elements.description.value && 
+                        <RichText
+                            richTextElement={presentation.elements.description}
+                            linkedItems={linkedItems}
+                        />
+                    }
                     </div>
                 )) 
                 

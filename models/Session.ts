@@ -14,4 +14,5 @@ export type Session = IContentItem<{
   presentation: Elements.LinkedItemsElement<Presentation>;
   journeyStage: Elements.TaxonomyElement;
   location: Elements.LinkedItemsElement<Room>;
+  slug: Elements.UrlSlugElement;
 }>;

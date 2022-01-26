@@ -3,38 +3,36 @@ import Session from '../components/Session'
 import { IContentItem } from "@kentico/kontent-delivery";
 import { Break as BreakModel} from "../models/Break";
 import Break from '../components/Break'
+import { projectModel } from "../models/_project";
 
 export default function Agenda({
     name,
     sessions,
-    agendaId }:{
+ }:{
         name: string,
         sessions: Array<IContentItem>,
-        agendaId: string
     }
 )
-
 {
     return (
-        <div key={agendaId}>
+        <div>
             <h3>
                 {name}
             </h3>
-            <div>
-                {sessions.map(session => {
-                    if(session.system.type=="session")
+                {sessions.map((session) => {
+                    if(session.system.type==projectModel.contentTypes.session.codename)
                     {
                         const agendaItem = session as SessionModel
                         return (
-                            <div key={session.system.id}>
-                            <Session
-                                    name={agendaItem.elements.name.value}
-                                    dateTimeFromDateTime={agendaItem.elements.dateTimeFromDateTime.value}
-                                    dateTimeToDateTime={agendaItem.elements.dateTimeToDateTime.value}
-                                    location={agendaItem.elements.location.linkedItems[0]}
-                                    sessionId={agendaItem.system.id}
-                            />
-                            </div>
+                                <Session
+                                        name={agendaItem.elements.name.value}
+                                        dateTimeFromDateTime={agendaItem.elements.dateTimeFromDateTime.value}
+                                        dateTimeToDateTime={agendaItem.elements.dateTimeToDateTime.value}
+                                        location={agendaItem.elements.location.linkedItems[0]}
+                                        sessionId={agendaItem.system.id}
+                                        sessionSlug={agendaItem.elements.slug.value}
+                                        collection={agendaItem.system.collection}
+                                />      
                         )
                     }
                     else {
@@ -50,7 +48,6 @@ export default function Agenda({
                     }
                 }
                 )}
-            </div>    
-        </div>
+        </div>    
     )
 }

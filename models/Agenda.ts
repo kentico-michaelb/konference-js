@@ -10,4 +10,5 @@ export type Agenda = IContentItem<{
   dateTimeFromDateTime: Elements.DateTimeElement;
   sessions: Elements.LinkedItemsElement<IContentItem>;
   name: Elements.TextElement;
+  slug: Elements.UrlSlugElement;
 }>;

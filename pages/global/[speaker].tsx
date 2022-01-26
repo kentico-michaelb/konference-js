@@ -21,7 +21,8 @@ const SpeakerPage: NextPage<Props> = ({ data, sessionData }) => {
     const speaker:SpeakerModel = data.item
     const speakerSessions:Array<Session> = sessionData.items
     return (
-        <Layout>
+        <Layout
+        navigation={[]}>
         <div className={styles.container}>
             <SpeakerDetail 
                 bio={speaker.elements.bio}
@@ -46,6 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         {
             params: {
               speaker: speaker.system.codename
+              
             },
         }
         ))

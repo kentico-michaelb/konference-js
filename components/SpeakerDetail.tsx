@@ -29,7 +29,6 @@ export default function SpeakerDetail({
     //TODO: clean this up in a helper utility and make it use process.env for collections
     const denverSessions = sessions.filter(session => session.system.collection == 'denver')
     const brnoSessions = sessions.filter(session => session.system.collection == 'brno')
-    const melbourneSessions = sessions.filter(session => session.system.collection == 'melbourne')
 
     return (
         <div key={speakerId}>
@@ -38,7 +37,7 @@ export default function SpeakerDetail({
                     src={media[0].elements.asset.value[0].url}
                     height={300}
                     width={300}
-                    alt={media[0].elements.asset.value[0].description}
+                    alt={media[0].elements.asset.name}
                 />
             }
             <h2>{firstName}&nbsp;{lastName}<br/></h2>
@@ -55,33 +54,19 @@ export default function SpeakerDetail({
             <h5>Denver Sessions:</h5>
             {denverSessions && denverSessions.map(session => (
                 <div key={`${speakerId}_${session.system.id}`}>
-                    <Session 
-                        name={session.elements.name.value}
-                        sessionId={session.system.id}
-                    />
+                    {session.elements.name.value}
+                    {session.system.id}
+                    
                 </div>
             ))}
             <hr />
             <h5>Brno Sessions:</h5>
             {brnoSessions && brnoSessions.map(session => (
                 <div key={`${speakerId}_${session.system.id}`}>
-                    <Session 
-                        name={session.elements.name.value}
-                        sessionId={session.system.id}
-                    />
+                    {session.elements.name.value}
+                    {session.system.id}
                 </div>
             ))}
-            <hr />
-            <h5>Melbourne Sessions:</h5>
-            {melbourneSessions && melbourneSessions.map(session => (
-                <div key={`${speakerId}_${session.system.id}`}>
-                    <Session 
-                        name={session.elements.name.value}
-                        sessionId={session.system.id}
-                    />
-                </div>
-            ))}
-            
         </div>
     )
 }

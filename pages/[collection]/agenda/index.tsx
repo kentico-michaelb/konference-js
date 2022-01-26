@@ -18,15 +18,14 @@ interface Props {
 
 const AgendaPage: NextPage<Props> = ({ agendas }) => {
   return (
-    <Layout>
+    <Layout
+    navigation={[]}>
     <div className={styles.container}>
-
       {agendas.map(agenda => (
         <div key={agenda.system.id}>
           <Agenda
             name={agenda.elements.name.value}
             sessions={agenda.elements.sessions.linkedItems}
-            agendaId={agenda.system.id}
           />
         </div>
 

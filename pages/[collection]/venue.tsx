@@ -19,7 +19,9 @@ interface IParams extends ParsedUrlQuery {
   const VenuePage: NextPage<Props> = ({ venuesData }) => {
     const venue:VenueModel= venuesData[0]
     return (
-        <Layout>
+        <Layout
+        navigation={[]}
+        >
             <div className={styles.container}>
             <Image 
               src={venue.elements.media.linkedItems[0].elements.asset.value[0].url}

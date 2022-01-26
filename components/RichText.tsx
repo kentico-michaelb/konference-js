@@ -1,17 +1,18 @@
 
 //from https://github.com/Kentico/kontent-starter-corporate-next-js/blob/main/components/RichText.js
 // TODO: instal libraries, implement RichTextComponent from sample
-import { ContentItemType } from '@kentico/kontent-delivery';
+import { IContentItem } from '@kentico/kontent-delivery';
 import Image from 'next/image'
-import Link from 'next/link'
 import RichTextComponent from "./RichTextComponent"
 
 export default function RichText({
     richTextElement,
     linkedItems
 }: {
-    richTextElement: any
-    linkedItems: any
+    // richTextElement: Elements.RichTextElement//there is an interface for these
+    // linkedItems: IContentItemsContainer //there is an interface for these
+    richTextElement: any//there is an interface for these
+    linkedItems: any //there is an interface for these
 }) {
 //   const richTextElement = get(props, "richTextElement", "");
 //   const linkedItems = get(props, "data.page.linkedItems", []);

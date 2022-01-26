@@ -6,11 +6,9 @@ const client = new DeliveryClient({
     propertyNameResolver: camelCasePropertyNameResolver, 
 })
 
-//TODO: Need to make colelction dynamic
-//TODO: analyze what appropriate depth would be
 export async function getItem<T extends IContentItem>(
     codename: string, 
-    depth: number)
+    depth: number = 1)
     {
     return await client
         .item<T>(codename)
@@ -41,8 +39,23 @@ export async function getSpeakerSessions<T extends IContentItem>(
         .items<T>()
         .type('session')
         .depthParameter(depth)
-        .containsFilter('speaker', [speaker])
+        .containsFilter('elements.speaker', [speaker])
         .orderByDescending('system.collection')
         .toPromise()
         .then(response => response.data)
+    }
+
+    export async function getItemBySlug<T extends IContentItem>(
+        slug: string,
+        type: string, 
+        depth: number)
+        {
+        return await client
+            .items<T>()
+            .type(type)
+            .equalsFilter('elements.slug', slug)
+            .depthParameter(depth)
+            .limitParameter(1)
+            .toPromise()
+            .then(response => response.data)
     }
